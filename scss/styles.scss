@@ -1,0 +1,69 @@
+:root {
+    --primary-color: #363d70;
+    --secondary-color: #f0f4fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--primary-color);
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("/img/512.png");
+    background-color: var(--secondary-color);
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+h1 {
+    margin: 0;
+}
+
+#container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding-top: 1rem;
+}
+
+input[type="date"] {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--secondary-color);
+    border-color: var(--primary-color);
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+input[type="checkbox"] {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    background: var(--primary-color);
+
+    &:checked {
+        background: var(--primary-color);
+    }
+}
+
+.checkbox-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+footer {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.no-text {
+    max-width: 300px;
+    margin: 0 auto;
+}

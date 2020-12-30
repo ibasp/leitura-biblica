@@ -1,2 +1,2 @@
-# ibasp-leitura-biblica
+# IBASP Leitura Bíblica
 Plano de Leitura Bíblica da IBASP
