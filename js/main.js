@@ -1280,7 +1280,7 @@ var todayTexts = days[dateInput.value];
 var userHistory = localStorage.getItem('history') ? JSON.parse(localStorage.getItem('history')) : {};
 
 dateInput.value = today;
-dateInput.max = today;
+//dateInput.max = today;
 
 dateInput.addEventListener("input", updateContent);
 checkbox1.addEventListener("change", checkConclusion);
