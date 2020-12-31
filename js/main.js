@@ -1278,6 +1278,8 @@ var label2 = document.querySelector("#label2");
 var checkbox2 = document.querySelector("#checkbox2");
 var todayTexts = days[dateInput.value];
 var userHistory = localStorage.getItem('history') ? JSON.parse(localStorage.getItem('history')) : {};
+var help = document.querySelector("#help");
+var helpCloseButton = document.querySelector("#helpCloseButton");
 
 dateInput.value = today;
 //dateInput.max = today; //Caso seja necessário limitar o dia máximo do input
@@ -1414,6 +1416,16 @@ function changeDate(period) {
   dateInput.value = selectedDate.toISOString().split("T")[0];
 
   updateContent();
+}
+
+function showHelp() {
+  help.style.left = 0;
+  helpCloseButton.style.display = "block";
+}
+
+function closeHelp() {
+  help.style.left = "-100%";
+  helpCloseButton.style.display = "none";
 }
 
 //Atualizar o conteúdo com o dia atual
