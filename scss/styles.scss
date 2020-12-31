@@ -57,7 +57,7 @@ input[type="checkbox"] {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
@@ -67,3 +67,40 @@ footer {
     max-width: 300px;
     margin: 0 auto;
 }
+
+#updateReady {
+    position: fixed;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 0;
+    z-index: 10;
+    transition: bottom 1s;
+    div {
+        font-size: 1rem;
+        p {
+            color: var(--secondary-color);
+        }
+        a {
+            svg {
+                margin-right: 5px;
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        a:link,
+        a:visited {
+            color: var(--secondary-color);
+        }
+    }
+  }

@@ -1,6 +1,6 @@
 {
     "name": "Leitura Bíblica IBASP",
-    "short_name": "Leitura",
+    "short_name": "Leitura IBASP",
     "description": "Faça sua leitura bíblica diária junto conosco",
     "start_url": "./?utm_source=pwa",
     "scope": "./",
