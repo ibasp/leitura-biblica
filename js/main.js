@@ -1360,5 +1360,13 @@ function updateContent() {
   }
 }
 
+function changeDate(period) {
+  var selectedDate = new Date(dateInput.value);
+  selectedDate.setDate(selectedDate.getDate() + period);
+
+  dateInput.value = selectedDate.toISOString().split("T")[0];
+
+  updateContent();
+}
 //Atualizar o conteúdo com o dia atual
 updateContent();

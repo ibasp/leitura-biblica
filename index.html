@@ -38,7 +38,21 @@
     <div id="container">
         <h1>Leitura Bíblica</h1>
 
+        <div id="controls">
+            <a onclick="changeDate(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+
         <input type="date" name="date" id="date" value="2021-01-01" aria-label="Input da data para leitura" />
+
+            <a onclick="changeDate(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
 
         <div class="flex">
             <h2>
