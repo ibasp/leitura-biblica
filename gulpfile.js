@@ -1,4 +1,5 @@
 const autoprefixer = require("gulp-autoprefixer"),
+    babel = require("gulp-babel"),
     browserSync = require("browser-sync").create(),
     concat = require("gulp-concat"),
     csso = require("gulp-csso"),
@@ -6,7 +7,9 @@ const autoprefixer = require("gulp-autoprefixer"),
     gulp = require("gulp"),
     htmlmin = require("gulp-htmlmin"),
     imagemin = require("gulp-imagemin"),
+    jsonminify = require("gulp-jsonminify"),
     sass = require("gulp-sass"),
+    sourcemaps = require("gulp-sourcemaps"),
     uglify = require("gulp-uglify"),
     workboxBuild = require("workbox-build");
 
@@ -36,6 +39,10 @@ function css() {
 function js() {
     return gulp
         .src("./js/**/*.js")
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
         .pipe(concat("main.js"))
         .pipe(uglify())
         .pipe(gulp.dest("./build/js"));
@@ -45,12 +52,20 @@ function sw() {
     return workboxBuild.generateSW({
         globDirectory: "build",
         globPatterns: ["**/*.{html,css,js,png,jpg,json,otf}"],
-        swDest: "build/sw.js",
+        swDest: "build/sw.js"
     });
 }
 
 function json() {
-    return gulp.src("./manifest.json").pipe(gulp.dest("./build"));
+    return gulp
+        .src([
+            "./**/*.json",
+            "!./package.json",
+            "!./package-lock.json",
+            "!./node_modules/**/*"
+        ])
+        .pipe(jsonminify())
+        .pipe(gulp.dest("./build"));
 }
 
 function img() {
