@@ -45,7 +45,7 @@
                 </svg>
             </a>
 
-        <input type="date" name="date" id="date" value="2021-01-01" aria-label="Input da data para leitura" />
+            <input type="date" name="date" id="date" value="2021-01-01" aria-label="Input da data para leitura" />
 
             <a onclick="changeDate(1)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,10 +88,32 @@
         </div>
 
         <footer>
-            Desenvolvido por
-            <a href="https://www.ibasp.org.br" target="_blank" rel="noopener noreferrer">
-                IBASP
-            </a>
+            <div class="backup">
+                <a id="export" onclick="exportHistory(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                    Exportar
+                </a>
+
+                <label id="import">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Importar
+                    <input type="file" name="importInput" id="importInput" accept="text/plain"
+                        onchange="importHistory(event)" />
+                </label>
+            </div>
+
+            <div>
+                Desenvolvido por
+                <a href="https://www.ibasp.org.br" target="_blank" rel="noopener noreferrer">
+                    IBASP
+                </a>
+            </div>
         </footer>
 
         <div id="updateReady">

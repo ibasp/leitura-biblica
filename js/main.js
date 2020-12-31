@@ -1280,7 +1280,7 @@ var todayTexts = days[dateInput.value];
 var userHistory = localStorage.getItem('history') ? JSON.parse(localStorage.getItem('history')) : {};
 
 dateInput.value = today;
-//dateInput.max = today;
+//dateInput.max = today; //Caso seja necessário limitar o dia máximo do input
 
 dateInput.addEventListener("input", updateContent);
 checkbox1.addEventListener("change", checkConclusion);
@@ -1313,20 +1313,40 @@ function checkConclusion(e) {
 function checkHistory() {
   if (userHistory[dateInput.value]) {
     if (userHistory[dateInput.value][1] !== null) {
-      label1.innerHTML = "Concluído em<br />" + (new Date(userHistory[dateInput.value][1])).toLocaleString("pt-BR");
-      checkbox1.checked = true;
+      completeText1();
+    } else {
+      uncompleteText1();
     }
 
     if (userHistory[dateInput.value][2] !== null) {
-      label2.innerHTML = "Concluído em<br />" + (new Date(userHistory[dateInput.value][2])).toLocaleString("pt-BR");
-      checkbox2.checked = true;
+      completeText2();
+    } else {
+      uncompleteText2();
     }
   } else {
-    label1.innerHTML = "Pendente";
-    checkbox1.checked = false;
-    label2.innerHTML = "Pendente";
-    checkbox2.checked = false;
+    uncompleteText1();
+    uncompleteText2();
   }
+}
+
+function completeText1() {
+  label1.innerHTML = "Concluído em<br />" + (new Date(userHistory[dateInput.value][1])).toLocaleString("pt-BR");
+  checkbox1.checked = true;
+}
+
+function uncompleteText1() {
+  label1.innerHTML = "Pendente";
+  checkbox1.checked = false;
+}
+
+function completeText2() {
+  label2.innerHTML = "Concluído em<br />" + (new Date(userHistory[dateInput.value][2])).toLocaleString("pt-BR");
+  checkbox2.checked = true;
+}
+
+function uncompleteText2() {
+  label2.innerHTML = "Pendente";
+  checkbox2.checked = false;
 }
 
 function hideContent() {
@@ -1360,6 +1380,33 @@ function updateContent() {
   }
 }
 
+function exportHistory(e) {
+  var content = new Blob([localStorage.getItem('history')], { type: "text/plain" });
+
+  e.target.href = URL.createObjectURL(content);
+  e.target.download = "Backup - Leitura Biblica Ibasp";
+}
+
+function importHistory(e) {
+  var file = e.target.files[0];
+
+  if (file.type === "text/plain") {
+    var reader = new FileReader();
+
+    reader.readAsText(file);
+
+    reader.onload = function (ev) {
+      console.log(ev.target.result !== "null");
+
+      if (ev.target.result !== "null") {
+        localStorage.setItem('history', ev.target.result);
+        userHistory = JSON.parse(localStorage.getItem('history'));
+        updateContent();
+      }
+    };
+  }
+}
+
 function changeDate(period) {
   var selectedDate = new Date(dateInput.value);
   selectedDate.setDate(selectedDate.getDate() + period);
@@ -1368,5 +1415,6 @@ function changeDate(period) {
 
   updateContent();
 }
+
 //Atualizar o conteúdo com o dia atual
 updateContent();

@@ -16,6 +16,7 @@ body {
     background-repeat: no-repeat;
     text-align: center;
     font-size: 1.3rem;
+    user-select: none;
 }
 
 h1 {
@@ -29,23 +30,37 @@ h1 {
     padding-top: 1rem;
 }
 
-input[type="date"] {
+#controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 0.5rem;
-    padding: 0.5rem;
-    background-color: var(--secondary-color);
-    border-color: var(--primary-color);
-    border-radius: 10px;
-    font-size: 1.3rem;
+    input[type="date"] {
+        padding: 0.5rem;
+        background-color: var(--secondary-color);
+        border-color: var(--primary-color);
+        border-radius: 10px;
+        font-size: 1.3rem;
+    }
+    a {
+        svg {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+    }
 }
 
-input[type="checkbox"] {
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.5rem;
-    background: var(--primary-color);
-
-    &:checked {
+.checkbox-div {
+    height: 50px;
+    input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.5rem;
         background: var(--primary-color);
+        
+        &:checked {
+            background: var(--primary-color);
+        }
     }
 }
 
@@ -61,6 +76,34 @@ footer {
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
+    width: 100%;
+    .backup {
+        display: flex;
+        justify-content: space-around;
+        padding: 1.5rem 0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        a,
+        label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            svg {
+                width: 1.5rem;
+                height: 1.5rem;
+                margin-right: 0.25rem;
+            }
+            &:link,
+            &:active {
+                color: var(--primary-color)
+            }
+            #importInput {
+                display: none;
+            }
+        }
+    }
 }
 
 .no-text {
