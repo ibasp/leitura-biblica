@@ -1383,6 +1383,8 @@ function updateContent() {
 }
 
 function exportHistory(e) {
+  if (localStorage.getItem('history') === null) return;
+
   var content = new Blob([localStorage.getItem('history')], { type: "text/plain" });
 
   e.target.href = URL.createObjectURL(content);
