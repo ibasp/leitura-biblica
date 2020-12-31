@@ -1300,7 +1300,7 @@ function checkConclusion(e) {
   }
 
   if (checked) {
-    label.innerHTML = "Concluído em<br />" + now.toLocaleString("pt-BR");
+    label.innerHTML = "Concluída em<br />" + now.toLocaleString("pt-BR");
 
     localSave[dateInput.value][number] = now;
 
@@ -1332,7 +1332,7 @@ function checkHistory() {
 }
 
 function completeText1() {
-  label1.innerHTML = "Concluído em<br />" + (new Date(userHistory[dateInput.value][1])).toLocaleString("pt-BR");
+  label1.innerHTML = "Concluída em<br />" + (new Date(userHistory[dateInput.value][1])).toLocaleString("pt-BR");
   checkbox1.checked = true;
 }
 
@@ -1342,7 +1342,7 @@ function uncompleteText1() {
 }
 
 function completeText2() {
-  label2.innerHTML = "Concluído em<br />" + (new Date(userHistory[dateInput.value][2])).toLocaleString("pt-BR");
+  label2.innerHTML = "Concluída em<br />" + (new Date(userHistory[dateInput.value][2])).toLocaleString("pt-BR");
   checkbox2.checked = true;
 }
 
