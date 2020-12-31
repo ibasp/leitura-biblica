@@ -53,6 +53,8 @@ function checkConclusion(e) {
   } else {
     label.innerHTML = "Pendente";
     localSave[dateInput.value][number] = null;
+
+    checkNullDateHistory();
   }
 
   localStorage.setItem("history", JSON.stringify(localSave));
@@ -74,6 +76,20 @@ function checkHistory() {
   } else {
     uncompleteText1();
     uncompleteText2();
+  }
+
+  checkNullDateHistory();
+}
+
+function checkNullDateHistory() {
+  if (
+    userHistory[dateInput.value]
+    && userHistory[dateInput.value][1] === null
+    && userHistory[dateInput.value][2] === null
+  ) {
+    delete userHistory[dateInput.value];
+
+    localStorage.setItem('history', JSON.stringify(userHistory));
   }
 }
 
