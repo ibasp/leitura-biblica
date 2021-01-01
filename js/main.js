@@ -26,7 +26,7 @@ checkbox2.addEventListener("change", checkConclusion);
 function getTexts() {
   if (!dateInput.value) return;
 
-  return fetch(`./js/${dateInput.value.split("-")[0]}.json`)
+  fetch(`./js/${dateInput.value.split("-")[0]}.json`)
     .then(res => res.status === 200 ? res.json() : {})
     .then(data => {
       days = data;

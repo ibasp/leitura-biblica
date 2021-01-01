@@ -38,23 +38,25 @@
     <div id="background"></div>
 
     <div id="container">
-        <h1>Leitura Bíblica</h1>
+        <div>
+            <h1>Leitura Bíblica</h1>
 
-        <div id="controls">
-            <a onclick="changeDate(-1)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </a>
+            <div id="controls">
+                <a onclick="changeDate(-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </a>
 
-            <input type="date" id="dateInput" value="2021-01-01" aria-label="Input da data para leitura" required
-                max="2100-12-31" />
+                <input type="date" id="dateInput" value="2021-01-01" aria-label="Input da data para leitura" required
+                    max="2100-12-31" />
 
-            <a onclick="changeDate(1)">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </a>
+                <a onclick="changeDate(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
         </div>
 
         <div id="content">
@@ -179,7 +181,7 @@
 
                 <ul>
                     <li>
-                        Utilize preferencialmente o navegador Safari.
+                        Utilize preferencialmente o navegador Safari ou Google Chrome.
                     </li>
                     <li>
                         Aparecerá a leitura do dia.
@@ -225,6 +227,12 @@
                         salvo no celular novo.)
                     </li>
                 </ol>
+
+                <p>
+                    Obs.: No iOS, a função exportar precisa do iOS 13 ou superior. Caso a sua versão seja inferior,
+                    copie o texto que aparece ao clicar em Exportar e salve em um arquivo txt. Isto equivale aos passos
+                    1 e 2.
+                </p>
 
                 <a id="helpCloseButton" onclick="closeHelp()">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
