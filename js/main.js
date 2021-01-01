@@ -1,6 +1,6 @@
 const dateInput = document.querySelector("#dateInput"),
-  noTextDiv = document.querySelector(".no-text"),
-  contentDiv = document.querySelector(".flex"),
+  noContentDiv = document.querySelector("#no-content"),
+  contentDiv = document.querySelector("#content"),
   text1 = document.querySelector("#text1"),
   label1 = document.querySelector("#label1"),
   checkbox1 = document.querySelector("#checkbox1"),
@@ -115,12 +115,12 @@ function uncompleteText2() {
 
 function hideContent() {
   contentDiv.style.display = "none";
-  noTextDiv.style.display = "block";
+  noContentDiv.style.display = "block";
 }
 
 function hideNoText() {
   contentDiv.style.display = "block";
-  noTextDiv.style.display = "none";
+  noContentDiv.style.display = "none";
 }
 
 function updateTexts() {

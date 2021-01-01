@@ -10,186 +10,198 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    background-image: url("/img/512.png");
-    background-color: var(--secondary-color);
-    background-position: center;
-    background-repeat: no-repeat;
     text-align: center;
     font-size: 1.3rem;
     user-select: none;
-}
+    background-color: var(--secondary-color);
 
-h1 {
-    margin: 0;
-}
-
-#container {
-    width: 100%;
-    min-height: calc(100vh - 1rem);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 1rem;
-}
-
-#controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0.5rem;
-    input[type="date"] {
-        padding: 0.5rem;
-        background-color: var(--secondary-color);
-        border-color: var(--primary-color);
-        border-radius: 10px;
-        font-size: 1.3rem;
-    }
-    a {
-        cursor: pointer;
-        margin: 0 1.5rem;
-        svg {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-    }
-}
-
-.checkbox-div {
-    height: 50px;
-    input[type="checkbox"] {
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-right: 0.5rem;
-        background: var(--primary-color);
-        
-        &:checked {
-            background: var(--primary-color);
-        }
-    }
-}
-
-.checkbox-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-}
-
-footer {
-    position: fixed;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    .backup {
-        display: flex;
-        justify-content: space-around;
-        padding: 1.5rem 0;
+    #background {
+        background-image: url("/img/512.png");
+        background-position: center;
+        background-repeat: no-repeat;
         width: 100%;
-        max-width: 600px;
-        margin: 0 auto;
-        a,
-        label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            text-decoration: none;
-            svg {
-                width: 1.5rem;
-                height: 1.5rem;
-                margin-right: 0.25rem;
-            }
-            &:link,
-            &:active {
-                color: var(--primary-color)
-            }
-            #importInput {
-                display: none;
-            }
-        }
+        height: 100vh;
+        position: absolute;
+        z-index: -1;
+        opacity: 0.2;
     }
-    a {
-        &:link,
-        &:visited {
-            color: var(--primary-color);
-        }
-        svg {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-    }
-}
 
-.no-text {
-    max-width: 300px;
-    margin: 0 auto;
-}
+    #container {
+        width: 100%;
+        min-height: calc(100vh - 1rem);
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
-#updateReady {
-    position: fixed;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: var(--primary-color);
-    width: 100%;
-    max-width: 600px;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 0;
-    z-index: 10;
-    transition: bottom 1s;
-    div {
-        font-size: 1rem;
-        p {
-            color: var(--secondary-color);
-        }
-        a {
-            svg {
-                margin-right: 5px;
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-        a:link,
-        a:visited {
-            color: var(--secondary-color);
-        }
-    }
-}
-
-#help {
-    position: absolute;
-    left: -100%;
-    top: 0;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    width: 100%;
-    min-height: 100vh;
-    overflow-y: auto;
-    transition: left 1s;
-    .content {
-        position: relative;
-        text-align: left;
-        padding: 0 1rem 2rem;
-        h2 {
-            margin-top: 1rem;
-        }
-        ul, ol {
+        h1 {
             margin: 0;
-            padding: 0 1.5rem;
         }
-        #helpCloseButton {
+
+        #controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+            input[type="date"] {
+                padding: 0.5rem;
+                background-color: var(--secondary-color);
+                border-color: var(--primary-color);
+                border-radius: 10px;
+                font-size: 1.3rem;
+            }
+            a {
+                cursor: pointer;
+                margin: 0 1.5rem;
+                svg {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                }
+            }
+        }
+
+        #content {
             display: none;
+
+            .checkbox-div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                height: 50px;
+
+                input[type="checkbox"] {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    margin-right: 0.5rem;
+                    background: var(--primary-color);
+                    
+                    &:checked {
+                        background: var(--primary-color);
+                    }
+                }
+            }
+        }
+
+        #no-content {
+            width: calc(100% - 2rem);
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        footer {
+            width: 100%;
+            background-color: var(--secondary-color);
+
+            .backup {
+                display: flex;
+                justify-content: space-around;
+                padding: 1.5rem 0;
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                a,
+                label {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    text-decoration: none;
+                    svg {
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        margin-right: 0.25rem;
+                    }
+                    &:link,
+                    &:active {
+                        color: var(--primary-color)
+                    }
+                    #importInput {
+                        display: none;
+                    }
+                }
+            }
+            a {
+                &:link,
+                &:visited {
+                    color: var(--primary-color);
+                }
+                svg {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                }
+            }
+        }
+
+        #updateReady {
             position: fixed;
-            right: 0.5rem;
-            top: 0.5rem;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--primary-color);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 0;
+            z-index: 10;
+            transition: bottom 1s;
+            div {
+                font-size: 1rem;
+                p {
+                    color: var(--secondary-color);
+                }
+                a {
+                    svg {
+                        margin-right: 5px;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+                }
+                a:link,
+                a:visited {
+                    color: var(--secondary-color);
+                }
+            }
+        }
+
+        #help {
+            position: absolute;
+            left: -100%;
+            top: 0;
+            background-color: var(--primary-color);
             color: var(--secondary-color);
-            svg {
-                width: 2.5rem;
-                height: 2.5rem;
+            width: 100%;
+            min-height: 100vh;
+            overflow-y: auto;
+            transition: left 1s;
+            .content {
+                position: relative;
+                text-align: left;
+                padding: 0 1rem 2rem;
+                h2 {
+                    margin-top: 1rem;
+                }
+                ul, ol {
+                    margin: 0;
+                    padding: 0 1.5rem;
+                }
+                #helpCloseButton {
+                    display: none;
+                    position: fixed;
+                    right: 0.5rem;
+                    top: 0.5rem;
+                    color: var(--secondary-color);
+                    svg {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                    }
+                }
             }
         }
     }
