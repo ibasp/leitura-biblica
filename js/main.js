@@ -26,12 +26,12 @@ checkbox2.addEventListener("change", checkConclusion);
 function getTexts() {
   if (!dateInput.value) return;
 
-  fetch(`./js/${dateInput.value.split("-")[0]}.json`)
-    .then(res => res.status === 200 ? res.json() : {})
-    .then(data => {
-      days = data;
+  axios.get(`./js/${dateInput.value.split("-")[0]}.json`)
+    .then(res => {
+      days = res.data;
       updateTodayTexts();
-    });
+    })
+    .catch(() => hideContent());
 }
 
 function checkConclusion(e) {
