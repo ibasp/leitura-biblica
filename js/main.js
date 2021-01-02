@@ -8,7 +8,10 @@ const dateInput = document.querySelector("#dateInput"),
   label2 = document.querySelector("#label2"),
   checkbox2 = document.querySelector("#checkbox2"),
   help = document.querySelector("#help"),
-  helpCloseButton = document.querySelector("#helpCloseButton");
+  helpCloseButton = document.querySelector("#helpCloseButton"),
+  userProgress = document.querySelector("#userProgress"),
+  yearProgress = document.querySelector("#yearProgress"),
+  badge = document.querySelector("#badge");
 
 let
   days = {},
@@ -71,6 +74,8 @@ function checkConclusion(e) {
   }
 
   localStorage.setItem("history", JSON.stringify(localSave));
+  getCompletedUserReadings();
+  checkUserOnStreak();
 }
 
 function checkHistory() {
@@ -154,6 +159,9 @@ function updateContent() {
   getTexts();
   updateTodayTexts();
   checkHistory();
+  getTotalReadingsOfTheYearUntilToday();
+  getCompletedUserReadings();
+  checkUserOnStreak();
 }
 
 function exportHistory(e) {
@@ -221,6 +229,34 @@ function showImportMessage() {
   let message = qty === 1 ? "Foi importado 1 dia" : `Foram importados ${qty} dias`;
 
   alert(`${message} do seu arquivo de backup!`);
+}
+
+function getTotalReadingsOfTheYearUntilToday() {
+  let count = Object.keys(days).filter(
+    //Filtrar datas do objeto
+    date => days[date] !== null
+      && date >= `${lastYearFetched}-01-01` //maiores ou igual ao primeiro dia do ano atual
+      && date <= `${lastYearFetched}-12-31` //menores ou igual ao último dia do ano atual
+      && date <= formatDateToString(new Date()) //menores ou igual ao dia atual
+  ).length;
+
+  yearProgress.innerText = count;
+}
+
+function getCompletedUserReadings() {
+  let count = Object.keys(userHistory).filter(
+    date => userHistory[date][1] !== null && userHistory[date][2]
+  ).length;
+
+  userProgress.innerText = count;
+}
+
+function checkUserOnStreak() {
+  if (userProgress.innerText >= yearProgress.innerText) {
+    badge.style.display = "block";
+  } else {
+    badge.style.display = "none";
+  }
 }
 
 //Atualizar o conteúdo com o dia atual

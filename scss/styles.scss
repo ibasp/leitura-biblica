@@ -94,6 +94,26 @@ body {
             width: 100%;
             background-color: var(--secondary-color);
 
+            #progress {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                font-size: 1.1rem;
+
+                span {
+                    margin-right: 0.5rem;
+                    b {
+                        font-size: 1.2rem;
+                    }
+                }
+
+                #badge {
+                    width: 1.5rem;
+                    display: none;
+                }
+            }
+
             .backup {
                 display: flex;
                 justify-content: space-around;
