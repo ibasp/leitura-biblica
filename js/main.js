@@ -137,7 +137,7 @@ function hideContent() {
 }
 
 function showContent() {
-  contentDiv.style.display = "block";
+  contentDiv.style.display = "flex";
   noContentDiv.style.display = "none";
 }
 
