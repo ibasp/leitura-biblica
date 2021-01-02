@@ -12,7 +12,7 @@ const dateInput = document.querySelector("#dateInput"),
 
 let
   days = {},
-  today = (new Date()).toISOString().split("T")[0],
+  today = formatDateToString(),
   todayTexts = days[dateInput.value],
   userHistory = localStorage.getItem("history") ? JSON.parse(localStorage.getItem("history")) : {};
 
@@ -172,10 +172,10 @@ function importHistory(e) {
 }
 
 function changeDate(period) {
-  let selectedDate = new Date(dateInput.value);
+  let selectedDate = new Date(dateInput.value + "T00:00");
   selectedDate.setDate(selectedDate.getDate() + period);
 
-  dateInput.value = selectedDate.toISOString().split("T")[0];
+  dateInput.value = formatDateToString(selectedDate);
 
   updateContent();
 }
@@ -188,6 +188,10 @@ function showHelp() {
 function closeHelp() {
   help.style.left = "-100%";
   helpCloseButton.style.display = "none";
+}
+
+function formatDateToString(date = new Date()) {
+  return date.toLocaleDateString().split("/").reverse().join("-");
 }
 
 //Atualizar o conteúdo com o dia atual
