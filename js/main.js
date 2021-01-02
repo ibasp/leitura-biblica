@@ -173,7 +173,10 @@ function importHistory(e) {
 
 function changeDate(period) {
   let selectedDate = new Date(dateInput.value + "T00:00");
+
   selectedDate.setDate(selectedDate.getDate() + period);
+
+  if (selectedDate < new Date("2021-01-01T00:00")) return;
 
   dateInput.value = formatDateToString(selectedDate);
 
