@@ -12,6 +12,7 @@ const dateInput = document.querySelector("#dateInput"),
 
 let
   days = {},
+  lastYearFetched = null,
   today = formatDateToString(),
   todayTexts = days[dateInput.value],
   userHistory = localStorage.getItem("history") ? JSON.parse(localStorage.getItem("history")) : {};
@@ -26,12 +27,19 @@ checkbox2.addEventListener("change", checkConclusion);
 function getTexts() {
   if (!dateInput.value) return;
 
-  axios.get(`./js/${dateInput.value.split("-")[0]}.json`)
-    .then(res => {
-      days = res.data;
-      updateTodayTexts();
-    })
-    .catch(() => hideContent());
+  let year = dateInput.value.split("-")[0];
+
+  if (year !== lastYearFetched) {
+    axios.get(`./js/${year}.json`)
+      .then(res => {
+        days = res.data;
+      })
+      .catch(() => hideContent())
+      .then(() => {
+        lastYearFetched = year;
+        updateContent();
+      });
+  }
 }
 
 function checkConclusion(e) {
@@ -123,14 +131,9 @@ function hideContent() {
   noContentDiv.style.display = "block";
 }
 
-function hideNoText() {
+function showContent() {
   contentDiv.style.display = "block";
   noContentDiv.style.display = "none";
-}
-
-function updateTexts() {
-  text1.innerText = todayTexts[1];
-  text2.innerText = todayTexts[2];
 }
 
 function updateTodayTexts() {
@@ -138,14 +141,18 @@ function updateTodayTexts() {
 
   if (todayTexts === undefined || todayTexts === null) {
     hideContent();
+    text1.innerText = "1";
+    text2.innerText = "2";
   } else {
-    hideNoText();
-    updateTexts();
+    showContent();
+    text1.innerText = todayTexts[1];
+    text2.innerText = todayTexts[2];
   }
 }
 
 function updateContent() {
   getTexts();
+  updateTodayTexts();
   checkHistory();
 }
 
