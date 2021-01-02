@@ -167,9 +167,16 @@ function importHistory(e) {
     reader.readAsText(file);
 
     reader.onload = (ev) => {
-      if (ev.target.result !== "null") {
-        localStorage.setItem("history", ev.target.result);
-        userHistory = JSON.parse(localStorage.getItem("history"));
+      let text = ev.target.result;
+      let json = JSON.parse(text);
+
+      if (
+        Object.keys(json).length > 0
+        && new Date(Object.keys(json)[0]) instanceof Date
+      ) {
+        localStorage.setItem("history", text);
+        userHistory = json;
+        showImportMessage();
         updateContent();
       }
     };
@@ -200,6 +207,13 @@ function closeHelp() {
 
 function formatDateToString(date = new Date()) {
   return date.toLocaleDateString().split("/").reverse().join("-");
+}
+
+function showImportMessage() {
+  let qty = Object.keys(userHistory).length;
+  let message = qty === 1 ? "Foi importado 1 dia" : `Foram importados ${qty} dias`;
+
+  alert(`${message} do seu arquivo de backup!`);
 }
 
 //Atualizar o conteúdo com o dia atual
