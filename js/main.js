@@ -169,8 +169,10 @@ function exportHistory(e) {
 
   let content = new Blob([localStorage.getItem("history")], { type: "text/plain" });
 
+  let exportDate = new Date();
+
   e.target.href = URL.createObjectURL(content);
-  e.target.download = "Backup - Leitura Biblica Ibasp";
+  e.target.download = "BackupLeituraBiblica-v" + exportDate.getTime();
 }
 
 function importHistory(e) {
