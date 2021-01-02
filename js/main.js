@@ -18,7 +18,9 @@ let
   lastYearFetched = null,
   today = formatDateToString(),
   todayTexts = days[dateInput.value],
-  userHistory = localStorage.getItem("history") ? JSON.parse(localStorage.getItem("history")) : {};
+  userHistory = localStorage.getItem("history") ? JSON.parse(localStorage.getItem("history")) : {},
+  userProgressCount = 0,
+  yearProgressCount = 0;
 
 dateInput.value = today;
 //dateInput.max = today; //Caso seja necessário limitar o dia máximo do input
@@ -232,7 +234,7 @@ function showImportMessage() {
 }
 
 function getTotalReadingsOfTheYearUntilToday() {
-  let count = Object.keys(days).filter(
+  yearProgressCount = Object.keys(days).filter(
     //Filtrar datas do objeto
     date => days[date] !== null
       && date >= `${lastYearFetched}-01-01` //maiores ou igual ao primeiro dia do ano atual
@@ -240,19 +242,23 @@ function getTotalReadingsOfTheYearUntilToday() {
       && date <= formatDateToString(new Date()) //menores ou igual ao dia atual
   ).length;
 
-  yearProgress.innerText = count;
+  let s = yearProgressCount !== 1 ? "s" : "";
+
+  yearProgress.innerHTML = `<b>${yearProgressCount}</b> dia${s}`;
 }
 
 function getCompletedUserReadings() {
-  let count = Object.keys(userHistory).filter(
+  userProgressCount = Object.keys(userHistory).filter(
     date => userHistory[date][1] !== null && userHistory[date][2]
   ).length;
 
-  userProgress.innerText = count;
+  let s = userProgressCount !== 1 ? "s" : "";
+
+  userProgress.innerHTML = `<b>${userProgressCount}</b> concluído${s}`;
 }
 
 function checkUserOnStreak() {
-  if (userProgress.innerText >= yearProgress.innerText) {
+  if (userProgressCount >= yearProgressCount) {
     badge.style.display = "block";
   } else {
     badge.style.display = "none";
