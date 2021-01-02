@@ -51,6 +51,11 @@ function checkConclusion(e) {
     localSave[dateInput.value][number] = now;
 
   } else {
+    if (!confirm("Deseja realmente tornar esta leitura como pendente?")) {
+      e.target.checked = true;
+      return;
+    };
+
     label.innerHTML = "Pendente";
     localSave[dateInput.value][number] = null;
 
