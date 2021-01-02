@@ -13,17 +13,15 @@ const dateInput = document.querySelector("#dateInput"),
   yearProgress = document.querySelector("#yearProgress"),
   badge = document.querySelector("#badge");
 
-let
-  days = {},
-  lastYearFetched = null,
+let lastYearFetched = null,
+  readings = {},
   today = formatDateToString(),
-  todayTexts = days[dateInput.value],
+  todayTexts = readings[dateInput.value],
   userHistory = localStorage.getItem("history") ? JSON.parse(localStorage.getItem("history")) : {},
   userProgressCount = 0,
   yearProgressCount = 0;
 
 dateInput.value = today;
-//dateInput.max = today; //Caso seja necessário limitar o dia máximo do input
 
 dateInput.addEventListener("input", updateContent);
 checkbox1.addEventListener("change", checkConclusion);
@@ -37,7 +35,7 @@ function getTexts() {
   if (year !== lastYearFetched) {
     axios.get(`./js/${year}.json`)
       .then(res => {
-        days = res.data;
+        readings = res.data;
       })
       .catch(() => hideContent())
       .then(() => {
@@ -144,7 +142,7 @@ function showContent() {
 }
 
 function updateTodayTexts() {
-  todayTexts = days[dateInput.value];
+  todayTexts = readings[dateInput.value];
 
   if (todayTexts === undefined || todayTexts === null) {
     hideContent();
@@ -234,9 +232,9 @@ function showImportMessage() {
 }
 
 function getTotalReadingsOfTheYearUntilToday() {
-  yearProgressCount = Object.keys(days).filter(
+  yearProgressCount = Object.keys(readings).filter(
     //Filtrar datas do objeto
-    date => days[date] !== null
+    date => readings[date] !== null
       && date >= `${lastYearFetched}-01-01` //maiores ou igual ao primeiro dia do ano atual
       && date <= `${lastYearFetched}-12-31` //menores ou igual ao último dia do ano atual
       && date <= formatDateToString(new Date()) //menores ou igual ao dia atual

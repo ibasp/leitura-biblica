@@ -51,7 +51,7 @@ function js() {
 function sw() {
     return workboxBuild.generateSW({
         globDirectory: "build",
-        globPatterns: ["**/*.{html,css,js,png,jpg,json,otf}"],
+        globPatterns: ["**/*.{html,css,js,png,jpg,json,otf,gif,map}"],
         swDest: "build/sw.js"
     });
 }
@@ -107,6 +107,16 @@ function clean() {
     return del(["build"]);
 }
 
+function axios() {
+    return gulp
+        .src([
+            "./node_modules/axios/dist/axios.min.js",
+            "./node_modules/axios/dist/axios.min.map",
+        ])
+        .pipe(gulp.dest("./build/js"));
+}
+
+exports.axios = axios;
 exports.css = css;
 exports.html = html;
 exports.js = js;
@@ -115,15 +125,5 @@ exports.sw = sw;
 exports.img = img;
 exports.fonts = fonts;
 exports.clean = clean;
-exports.build = gulp.series(clean, html, css, js, move_imgs, fonts, json, sw);
-exports.default = gulp.series(
-    clean,
-    html,
-    css,
-    js,
-    move_imgs,
-    fonts,
-    json,
-    sw,
-    watch
-);
+exports.build = gulp.series(clean, html, css, axios, js, move_imgs, fonts, json, sw);
+exports.default = gulp.series(clean, html, css, axios, js, move_imgs, fonts, json, sw, watch);

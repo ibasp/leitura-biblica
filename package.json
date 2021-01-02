@@ -26,5 +26,8 @@
   ],
   "author": "Rafael Lotto Machado",
   "license": "MIT",
-  "homepage": "https://leitura.ibasp.org.br"
+  "homepage": "https://leitura.ibasp.org.br",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
