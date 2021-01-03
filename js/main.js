@@ -244,7 +244,7 @@ function getTotalReadingsOfTheYearUntilToday() {
 
   let s = yearProgressCount !== 1 ? "s" : "";
 
-  yearProgress.innerHTML = `<b>${yearProgressCount}</b> dia${s}`;
+  yearProgress.innerHTML = `<b>${yearProgressCount}</b> dia${s} concluído${s}`;
 }
 
 function getCompletedUserReadings() {
@@ -252,9 +252,7 @@ function getCompletedUserReadings() {
     date => userHistory[date][1] !== null && userHistory[date][2]
   ).length;
 
-  let s = userProgressCount !== 1 ? "s" : "";
-
-  userProgress.innerHTML = `<b>${userProgressCount}</b> concluído${s}`;
+  userProgress.innerText = userProgressCount;
 }
 
 function checkUserOnStreak() {
