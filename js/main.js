@@ -23,7 +23,10 @@ let lastYearFetched = null,
 
 dateInput.value = today;
 
-dateInput.addEventListener("input", updateContent);
+dateInput.addEventListener("input", e => {
+  updateContent();
+  umami(`O usuário alterou para o dia ${e.target.value.split("-").reverse().join("/")}`);
+});
 checkbox1.addEventListener("change", checkConclusion);
 checkbox2.addEventListener("change", checkConclusion);
 
@@ -64,6 +67,7 @@ function checkConclusion(e) {
 
     localSave[dateInput.value][number] = now;
 
+    umami(`A leitura ${number} do dia ${dateInput.value.split("-").reverse().join("/")} foi concluída`);
   } else {
     if (!confirm("Deseja realmente tornar esta leitura como pendente?")) {
       e.target.checked = true;
@@ -74,6 +78,8 @@ function checkConclusion(e) {
     localSave[dateInput.value][number] = null;
 
     checkNullDateHistory();
+
+    umami(`A conclusão da leitura ${number} do dia ${dateInput.value.split("-").reverse().join("/")} foi removida`);
   }
 
   localStorage.setItem("history", JSON.stringify(localSave));
@@ -173,6 +179,8 @@ function exportHistory(e) {
 
   e.target.href = URL.createObjectURL(content);
   e.target.download = "BackupLeituraBiblica-v" + exportDate.getTime();
+
+  umami("O usuário fez backup dos dados");
 }
 
 function importHistory(e) {
@@ -195,6 +203,8 @@ function importHistory(e) {
         userHistory = json;
         showImportMessage();
         updateContent();
+
+        umami("O usuário restaurou os dados de um backup");
       }
     };
   }
@@ -210,16 +220,22 @@ function changeDate(period) {
   dateInput.value = formatDateToString(selectedDate);
 
   updateContent();
+
+  umami(`O usuário alterou para o dia ${dateInput.value.split("-").reverse().join("/")}`);
 }
 
 function showHelp() {
   help.style.left = 0;
   helpCloseButton.style.display = "block";
+
+  umami("O usuário abriu a ajuda");
 }
 
 function closeHelp() {
   help.style.left = "-100%";
   helpCloseButton.style.display = "none";
+
+  umami("O usuário fechou a ajuda");
 }
 
 function formatDateToString(date = new Date()) {
@@ -258,6 +274,7 @@ function getCompletedUserReadings() {
 function checkUserOnStreak() {
   if (yearProgressCount > 0 && userProgressCount >= yearProgressCount) {
     badge.style.display = "block";
+    umami("O usuário está em dia com as leituras");
   } else {
     badge.style.display = "none";
   }
