@@ -41,6 +41,9 @@ function getTexts() {
       .then(() => {
         lastYearFetched = year;
         updateContent();
+        getTotalReadingsOfTheYearUntilToday();
+        getCompletedUserReadings();
+        checkUserOnStreak();
       });
   }
 }
@@ -159,9 +162,6 @@ function updateContent() {
   getTexts();
   updateTodayTexts();
   checkHistory();
-  getTotalReadingsOfTheYearUntilToday();
-  getCompletedUserReadings();
-  checkUserOnStreak();
 }
 
 function exportHistory(e) {
@@ -256,7 +256,7 @@ function getCompletedUserReadings() {
 }
 
 function checkUserOnStreak() {
-  if (userProgressCount >= yearProgressCount) {
+  if (yearProgressCount > 0 && userProgressCount >= yearProgressCount) {
     badge.style.display = "block";
   } else {
     badge.style.display = "none";
